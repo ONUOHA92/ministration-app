@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --prod",
+    "build": "ng build",
     "node": "node src/server/server.js",
     "test": "ng test",
     "lint": "ng lint",
