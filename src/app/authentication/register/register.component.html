@@ -1,0 +1,104 @@
+<div class="page main-signin-wrapper">
+
+    <!-- Row -->
+    <div class="row signpages text-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="row row-sm">
+                    <div class="col-lg-6 col-xl-5 d-none d-lg-block text-center  bg-primary details">
+                        <div class="mt-5 pt-4 p-2 pos-absolute">
+                            <!-- <img src="../../assets/img/brand/logo-light.png" class="header-brand-img mb-4" alt="logo"> -->
+                            <div class="clearfix"></div>
+                            <img src="../../assets/img/svgs/user.svg" class="ht-100 mb-0" alt="user">
+                            <h5 class="mt-4 text-white">User Account</h5>
+                            <span class="tx-white-6 tx-13 mb-10 mt-xl-0 ">
+                                Admin Account Sign up Console. Feremy User Music
+                            </span>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form ">
+                        <div class="container-fluid">
+                            <div class="row row-sm">
+                                <div class="card-body mt-0 mb-1">
+                                    <!-- <img src="../../assets/img/brand/logo.png"
+                                        class=" d-lg-none header-brand-img text-left float-left mb-4" alt="logo"> -->
+                                    <div class="clearfix"></div>
+                                    <form [formGroup]="registerForm" (ngSubmit)="Submit()" novalidate>
+                                        <h5 class="text-left mb-0">Sigup to Your Account</h5>
+                                        <p class="mb-4 text-muted tx-13 ml-0 text-left">
+                                            Sign up to manage staff day to day activities
+                                        </p>
+                                        <!--<ngb-alert type="primary" [dismissible]="false">
+                                             <span class="alert-inner--text">Use account <strong>spruha@demo.com</strong> and password <strong>spruha</strong> to continue.</span> 
+                                        </ngb-alert>-->
+                                        <div class="form-group-register text-left">
+                                            <label>Firstname</label>
+                                            <input class="form-control" formControlName="first_name" type="text">
+                                            <div *ngIf="(registerFormControl.first_name.touched || submitted) && (registerFormControl.first_name.errors?.required)"
+                                                class="tx-danger">
+                                                <!-- <small>Enter spruha@demo.com to login</small> -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group-register text-left">
+                                            <label>Lastname</label>
+                                            <input class="form-control" formControlName="last_name" type="text">
+                                            <div *ngIf="(registerFormControl.last_name.touched || submitted) && (registerFormControl.last_name.errors?.required)"
+                                                class="tx-danger">
+                                                <!-- <small>Enter spruha@demo.com to login</small> -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group-register text-left">
+                                            <label>Email</label>
+                                            <input class="form-control" formControlName="email" type="text">
+                                            <div *ngIf="(registerFormControl.email.touched || submitted) && (registerFormControl.email.errors?.required)"
+                                                class="tx-danger">
+                                                <!-- <small>Enter spruha@demo.com to login</small> -->
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group-register text-left">
+                                            <label>Role</label>
+                                            <select class="form-control" formControlName="role">
+                                                <option value="" disabled>role</option>
+                                                <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                                            </select>
+                                            <div *ngIf="(registerFormControl.role.touched || submitted) && (registerFormControl.role.errors?.required)"
+                                                class="tx-danger">
+                                            </div>
+                                        </div>
+                                        <div class="form-group-register text-left">
+                                            <label>Password</label>
+                                            <input class="form-control" formControlName="password" type="password">
+                                            <div *ngIf="(registerFormControl.password.touched || submitted) && (registerFormControl.password.errors?.required)"
+                                                class="tx-danger">
+                                                <small>Enter above password</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group-register text-left">
+                                            <label>Confirm Password</label>
+                                            <input class="form-control" formControlName="confirmPassword"
+                                                type="password">
+                                            <div *ngIf="(registerFormControl.confirmPassword.touched || submitted) && (registerFormControl.confirmPassword.errors?.required)"
+                                                class="tx-danger">
+                                                <small>Enter above password</small>
+                                            </div>
+                                        </div>
+                                        <button class="btn ripple mt-3 btn-main-primary btn-block"
+                                            [disabled]="!registerForm.valid">Sign up</button>
+                                    </form>
+                                    <div class="text-left mt-3 ml-0">
+                                        <div class="mb-1"><a href="/login">Sign in</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Row -->
+
+</div>

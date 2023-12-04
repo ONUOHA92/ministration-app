@@ -1,0 +1,56 @@
+
+<div class="row">
+  
+    <div class="col-lg-12 d-flex">
+
+        <div class="" *ngIf="data" style="width:80px;height:80px;border:1px solid rgb(151, 149, 149);margin:10px">
+            <img *ngIf="data.value!='-'" src="{{ data.value }}" style="width: 75px;">
+            <div *ngIf="data.value=='-'" style="text-align: center;margin-top: 30px;">Preview</div>
+        </div>
+        <div style="width:100%" *ngIf="is_showing">
+            <a href="javascript:;" style="float: right;" (click)="onDelete()" class="btn pull-right"><i class="ti ti-trash"></i> </a>
+            <label> {{ label }} </label>
+            
+            <input
+                readonly
+                (click)="addImage(newImage)"
+                type="text" 
+                class="form-control" 
+                autocomplete="off"
+                [(ngModel)]="inputModel"
+                (ngModelChange)="onUpdate(inputModel)"
+                [id]="id"
+                placeholder="write something..."
+                [value]="value">
+    
+                <ng-template #newImage let-modal>
+                    <!-- Select2 modal -->
+                    <div class="modal-header">
+                        <h6 class="modal-title">Select Image</h6>
+                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <div class="form-group row">
+                
+                            <div class="col-lg-12 mt-4">
+                                
+                                <div class="row" *ngFor="let image of images; let i = index">
+                                    <img (click)="getImages(image.path)" src="{{ image.path }}" />
+                                </div>
+                
+                            </div>
+                
+                        </div>
+                
+                    </div>
+    
+                </ng-template>
+        </div>
+        <!-- End of form -->
+
+    </div>
+
+</div>

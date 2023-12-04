@@ -1,0 +1,300 @@
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h2 class="main-content-title tx-24 mg-b-5">All Songs</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Settings</li>
+        </ol>
+    </div>
+
+</div>
+<!-- End Page Header -->
+
+<div class="row row-sm">
+    <div class="col-md-12 col-lg-12">
+        <div class="card custom-card">
+            <div class="card-header  border-bottom-0 pb-0">
+                <div>
+                    <div class="d-flex">
+                        <label class="main-content-label my-auto pt-2">All Staff</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row table-filter">
+                    <div class="col-lg-3">
+                        <div class="show-entries">
+                            <span>Show</span>
+                            <select class="form-control">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                            <span>entries</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 d-lg-flex">
+                        <div class="d-flex ml-auto mt-4 mr-3 mt-lg-0">
+                            <div class="filter-group">
+                                <input type="text" [(ngModel)]="searchTerm" class="form-control"
+                                    placeholder="search songs" (keyup)="search()">
+                            </div>
+                            <button type="button" class="btn bg-orange-color"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div class="d-flex mt-4 mt-lg-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive border">
+                    <table class="table mb-0 text-nowrap text-md-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Intro</th>
+                                <th>lyrics</th>
+                                <th>lyrics link</th>
+                                <th>link</th>
+
+                        </thead>
+                        <tbody>
+                            <!-- | slice: (page-1) * config.pageSize : page * config.pageSize -->
+                            <tr class="border-bottom" *ngFor="let data of filteredSongs ">
+                                <td>{{ data.title }}</td>
+                                <td>{{ data.intro }}</td>
+                                <!-- <td>{{ data.lyrics }}</td> -->
+
+                                <td>
+                                    <button class="custom-button"
+                                        (click)="openLyricsModal(data, selectLyricsmodal )">View
+                                        Lyrics</button>
+
+                                </td>
+
+                                <td><a href="{{data.lyricslink}}" target="_blank" rel="noopener noreferrer"><i
+                                            class="fa fa-eye"></i></a></td>
+                                <td><a href="{{data.link}}" target="_blank" rel="noopener noreferrer"><i
+                                            class="fa fa-eye"></i></a></td>
+
+                                <td class="text-center">
+
+                                    <span *ngIf="data.status" class="label text-success d-flex"><span
+                                            class="dot-label bg-success mr-1"
+                                            style="margin-top: 6px;"></span>Active</span>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-3">
+                        <ngb-pagination class="d-flex justify-content-end" id="page1" [collectionSize]="users.length"
+                            [maxSize]="config.maxSize" [pageSize]="config.pageSize" [(page)]="page"
+                            aria-label="Custom pagination">
+                            <ng-template ngbPaginationPrevious>Prev</ng-template>
+                            <ng-template ngbPaginationNext>Next</ng-template>
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Row -->
+
+
+
+<ng-template #selectLyricsmodal let-modal>
+    <!-- Select2 modal -->
+    <div class="modal-header">
+        <h6 class="modal-title">Lyrics Details</h6>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h6> Song Lyrics </h6>
+        <!-- <div class="">{{ lyricsData }}</div> -->
+
+        <div class="" style="background:white;padding: 30px">
+
+            <quill-editor [(ngModel)]="lyricsData" (onContentChanged)="logChange($event, 'content')">
+                <div quill-editor-toolbar>
+                    <span class="ql-formats">
+                        <select class="ql-font">
+                            <option selected></option>
+                            <option value="serif"></option>
+                            <option value="monospace"></option>
+                        </select>
+                        <select class="ql-size">
+                            <option value="small"></option>
+                            <option selected></option>
+                            <option value="large"></option>
+                            <option value="huge"></option>
+                        </select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                        <button class="ql-strike"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-color"></select>
+                        <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-list" value="ordered"></button>
+                        <button class="ql-list" value="bullet"></button>
+                        <select class="ql-align">
+                            <option selected></option>
+                            <option value="center"></option>
+                            <option value="right"></option>
+                            <option value="justify"></option>
+                        </select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-link"></button>
+                        <button class="ql-image"></button>
+                    </span>
+                </div>
+            </quill-editor>
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn ripple btn-secondary" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>
+
+
+<ng-template #select2modal let-modal>
+    <!-- Select2 modal -->
+    <div class="modal-header">
+        <h6 class="modal-title">New User</h6>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h6>User Account</h6>
+        <!-- Select2 -->
+        <!-- <ng-select class="form-control p-0">
+            <ng-option value="Firefox">Firefox</ng-option>
+            <ng-option value="Chrome">Chrome</ng-option>
+            <ng-option value="Safari">Safari</ng-option>
+            <ng-option value="Opera">Opera</ng-option>
+            <ng-option value="Internet Explorer">Internet Explorer</ng-option>
+        </ng-select> -->
+        <!-- Select2 -->
+
+        <div class="form-group row">
+
+            <div class="col-lg-6 mt-4">
+
+                <app-input [type]="'text'" [class]="'form-control'" [id]="'firstname'" [value]="newUser.firstName"
+                    [placeholder]="'Enter First Name'" [(inputModel)]="newUser.firstName">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <app-input [type]="'text'" [class]="'form-control'" [id]="'lastname'" [value]="newUser.lastName"
+                    [placeholder]="'Enter Last Name'" [(inputModel)]="newUser.lastName">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <app-input [type]="'email'" [class]="'form-control'" [id]="'email'" [value]="newUser.email"
+                    [placeholder]="'Enter Username'" [(inputModel)]="newUser.email">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <app-input [type]="'password'" [class]="'form-control'" [id]="'password'" [value]="newUser.password"
+                    [placeholder]="'Enter Password'" [(inputModel)]="newUser.password">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <app-input [type]="'phone'" [class]="'form-control'" [id]="'phone'" [value]="newUser.phone"
+                    [placeholder]="'Enter Phone Number'" [(inputModel)]="newUser.phone">
+                </app-input>
+
+            </div>
+
+
+
+        </div>
+
+        <p class="mt-3">
+            Admin Register New User account
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn ripple btn-primary" type="button">Create User</button>
+        <button type="button" class="btn ripple btn-secondary" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>
+
+<ng-template #privilegeModel let-modal>
+    <!-- Select2 modal -->
+    <div class="modal-header">
+        <h6 class="modal-title">Privileges</h6>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <p class="mt-3">
+            Assign Privilege to this user. Please, be sure you aware of the consequence of this before you proceed
+        </p>
+
+        <div class="table-responsive border">
+            <table class="table mb-0 text-nowrap text-md-nowrap">
+                <thead>
+                    <tr>
+                        <th>Privilege</th>
+                        <th>Read</th>
+                        <th>Write</th>
+                        <th>Execute</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr class="border-bottom" *ngFor="let data of controls">
+                        <td>{{ data.key }}</td>
+                        <td>
+                            <input type="checkbox" [(ngModel)]="data.value.read">
+                        </td>
+                        <td>
+                            <input type="checkbox" [(ngModel)]="data.value.write">
+                        </td>
+                        <td>
+                            <input type="checkbox" [(ngModel)]="data.value.execute">
+                        </td>
+                        <td><button (click)="save(data)" class="btn btn-primary btn-sm">Save</button></td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+
+
+    </div>
+
+</ng-template>

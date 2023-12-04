@@ -1,0 +1,13 @@
+<div class="" *ngIf="is_showing">
+<a href="javascript:;" style="float: right;" (click)="onDelete()" class="btn pull-right"><i class="ti ti-trash"></i> </a>
+<label>{{ label }} </label>
+<input
+    type="date" 
+    class="form-control" 
+    autocomplete="off"
+    [(ngModel)]="inputModel"
+    (ngModelChange)="logChange(inputModel)"
+    [id]="id"
+    placeholder="write something..."
+    [value]="value">
+</div>

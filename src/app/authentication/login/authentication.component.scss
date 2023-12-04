@@ -1,0 +1,23 @@
+$loginPrimaryColor: #4D4CB2E6;
+$loginWhiteColor: #FFFFFF99;
+$colorWhite: #ffff;
+
+.login-color {
+    background-color: $loginPrimaryColor;
+}
+
+.tx-white-6 {
+    color: $loginWhiteColor;
+}
+
+.white-link {
+    color: $colorWhite;
+}
+
+.bg-orange-color {
+    background-color: #e57a2d !important;
+}
+
+text-orange {
+    color: #e57a2d !important;
+}

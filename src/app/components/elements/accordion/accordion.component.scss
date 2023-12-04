@@ -1,0 +1,52 @@
+/* Custom styles for the accordion */
+.custom-accordion {
+    background-color: #f0f0f0;
+    /* Change the background color */
+    border: 1px solid #ddd;
+    /* Add a border */
+    border-radius: 5px;
+    /* Add some border radius */
+    margin: 20px;
+    /* Adjust margin */
+}
+
+
+custom-color {
+    background-color: #e57a2d !important;
+}
+
+/* Custom styles for the accordion panels */
+.custom-panel {
+    background-color: #fff;
+    /* Change the background color */
+    border-bottom: 1px solid #ddd;
+    /* Add a border between panels */
+}
+
+/* Custom styles for the buttons */
+.custom-button {
+    background-color: #e57a2d;
+    /* Set the button background color */
+    color: #fff;
+    /* Set the text color */
+    padding: 10px;
+    /* Add some padding */
+    border: none;
+    /* Remove the button border */
+    border-radius: 5px;
+    /* Add some border radius */
+    cursor: pointer;
+    /* Change cursor on hover */
+    width: 100%;
+    /* Make buttons fill the width */
+    text-align: left;
+    /* Align text to the left */
+}
+
+/* Style the collapsed panel bodies */
+.collapse {
+    padding: 10px;
+    /* Add padding inside the collapsed panels */
+    border-top: 1px solid #ddd;
+    /* Add a border at the top */
+}

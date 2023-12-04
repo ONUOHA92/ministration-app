@@ -1,0 +1,43 @@
+<ng-template #successmodal let-modal class="successmodal">
+    <!-- Congratulations MODAL -->
+    <div class="modal-body text-center p-4">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <i class="icon ion-ios-checkmark-circle-outline tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
+        <h4 class="tx-success tx-semibold mg-b-20">{{ message }}</h4>
+        <p class="mg-b-20 mg-x-20">{{ caption }}</p>
+        <button type="button" class="btn btn-success pd-x-25 mr-0"
+            (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<!-- <button class="btn ripple btn-success" (click)="SuccessOpen(successmodal)">View Demo</button> -->
+
+<ng-template #warningmodal let-modal>
+    <!-- Warning MODAL -->
+    <div class="modal-body text-center p-4">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <i class="icon icon ion-ios-close-circle-outline tx-100 tx-warning lh-1 mg-t-20 d-inline-block"></i>
+        <h4 class="tx-warning mg-b-20">{{ message }}</h4>
+        <p class="mg-b-20 mg-x-20">{{ caption }}</p>
+        <button type="button" class="btn btn-warning pd-x-25 mr-0" (click)="onConfirm()">Confirm</button>
+        <button type="button" class="btn btn-default pd-x-25 mr-0" (click)="modal.close('Close click')">Cancel</button>
+    </div>
+</ng-template>
+
+
+<ng-template #errormodal let-modal>
+    <!-- Warning MODAL -->
+    <div class="modal-body text-center p-4">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <i class="icon icon ion-ios-close-circle-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+        <h4 class="tx-danger mg-b-20">{{ message }}</h4>
+        <p class="mg-b-20 mg-x-20">{{ caption }}</p>
+        <button type="button" class="btn btn-danger pd-x-25 mr-0" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

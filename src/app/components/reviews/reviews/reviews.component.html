@@ -1,0 +1,316 @@
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h2 class="main-content-title tx-24 mg-b-5">Reviews</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Reviews</li>
+        </ol>
+    </div>
+    <div class="d-flex">
+        <div class="justify-content-center">
+            <button type="button" class="btn btn-white btn-icon-text my-2 mr-2">
+                <i class="fe fe-filter mr-2"></i> Search
+            </button>
+            <button class="btn ripple btn-info" (click)="Select2Open(select2modal)">
+                <i class="fe fe-download-cloud mr-2"></i> New Remarks
+            </button>
+        </div>
+    </div>
+</div>
+<!-- End Page Header -->
+
+<!-- <app-alert [status]="modalValue"></app-alert> -->
+
+<div class="row row-sm">
+    <div class="col-md-12 col-lg-12">
+        <div class="card custom-card">
+            <div class="card-header  border-bottom-0 pb-0">
+                <div>
+                    <div class="d-flex">
+                        <label class="main-content-label my-auto pt-2">All Reports</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row table-filter">
+                    <div class="col-lg-3">
+                        <div class="show-entries">
+                            <span>Show</span>
+                            <select class="form-control">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                            <span>entries</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 d-lg-flex">
+                        <div class="d-flex ml-auto mt-4 mr-3 mt-lg-0">
+                            <div class="filter-group">
+                                <input type="text" class="form-control" placeholder="search">
+                            </div>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div class="d-flex mt-4 mt-lg-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive border">
+                    <table class="table mb-0 text-nowrap text-md-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Staff</th>
+                                <th>Remark</th>
+                                <th>Status</th>
+                                <th>Visitor</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-bottom">
+                                <td>Gregor Project Outreach</td>
+                                <td>David Jones</td>
+                                <td>Excellent </td>
+                                <td>Active</td>
+                                <td>Permanent</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:;" class="btn"><i class="ti ti-files"></i></a>
+                                        <a href="javascript:;" class="btn"><i class="ti ti-pencil"></i></a>
+                                        <a href="javascript:;" class="btn"><i class="ti ti-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-3">
+                        <!-- <ngb-pagination class="d-flex justify-content-end" [collectionSize]="reports.length"
+                            [(page)]="page" aria-label="Custom pagination">
+                            <ng-template ngbPaginationPrevious>Prev</ng-template>
+                            <ng-template ngbPaginationNext>Next</ng-template>
+                        </ngb-pagination> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Row -->
+
+
+<ng-template #select2modal let-modal>
+    <!-- Select2 modal -->
+    <div class="modal-header">
+        <h6 class="modal-title">New Message</h6>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group row">
+
+            <div class="col-lg-12 mt-4">
+                <div class="form-group">
+                    <label>Event Name:</label>
+                    <ng-select class="form-control p-0" (change)="onSelected($event, 'job')">
+                        <ng-option *ngFor="let data of jobs; let i = index" value="{{ data.id }}">
+                            {{ data.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label> Event Date </label>
+                <app-input [type]="'datetime-local'" [class]="'form-control'" [id]="'name'" [value]="form.date"
+                    [placeholder]="'Date of Event'" [(inputModel)]="form.date">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+                <div class="form-group">
+                    <label>Senior Staff:</label>
+                    <ng-select class="form-control p-0" (change)="onSelected($event, 'user')">
+                        <ng-option *ngFor="let data of users; let i = index" value="{{ data.id }}">
+                            {{ data.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-lg-12 mt-4">
+                <h6> Staff On Duty </h6>
+            </div>
+
+
+            <div class="col-lg-6 mt-4">
+
+                <label> No. of Paramedics </label>
+                <app-input [type]="number" [class]="'form-control'" [id]="'name'" [value]="form.paramedics"
+                    [placeholder]="'0'" [(inputModel)]="form.paramedics">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label> No. of Technicians </label>
+                <app-input [type]="number" [class]="'form-control'" [id]="'name'" [value]="form.technicians"
+                    [placeholder]="'0'" [(inputModel)]="form.technicians">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-12 mt-4">
+                <h6> Service Time </h6>
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label> Clock In Time </label>
+                <app-input [type]="'datetime-local'" [class]="'form-control'" [id]="'name'" [value]="form.clock_in_time"
+                    [placeholder]="'Clock In Time'" [(inputModel)]="form.clock_in_time">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label> Stand Down Time </label>
+                <app-input [type]="'datetime-local'" [class]="'form-control'" [id]="'name'"
+                    [value]="form.clock_out_time" [placeholder]="'Clock Out Time'" [(inputModel)]="form.clock_out_time">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-4 mt-4">
+
+                <label> Number of Callouts </label>
+                <app-input [type]="'number'" [class]="'form-control'" [id]="'name'" [value]="form.callouts"
+                    [placeholder]="'0'" [(inputModel)]="form.callouts">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-4 mt-4">
+
+                <label> Ear plugs </label>
+                <app-input [type]="number" [class]="'form-control'" [id]="'name'" [value]="form.ear_pugs"
+                    [placeholder]="'0'" [(inputModel)]="form.ear_pugs">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-4 mt-4">
+
+                <label> No of ambulances </label>
+                <app-input [type]="number" [class]="'form-control'" [id]="'name'" [value]="form.ambulances"
+                    [placeholder]="'0'" [(inputModel)]="form.ambulances">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-12 mt-4">
+                <h6> Attendees</h6>
+            </div>
+
+
+            <div class="col-lg-4 mt-4">
+
+                <label> Arena staff</label>
+                <app-input [type]="'number'" [class]="'form-control'" [id]="'name'" [value]="form.arena_staff"
+                    [placeholder]="'0'" [(inputModel)]="form.arena_staff">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-4 mt-4">
+
+                <label> Catering staff </label>
+                <app-input [type]="'number'" [class]="'form-control'" [id]="'name'" [value]="form.catering"
+                    [placeholder]="'0'" [(inputModel)]="form.catering">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-4 mt-4">
+
+                <label> Event staff </label>
+                <app-input [type]="'number'" [class]="'form-control'" [id]="'name'" [value]="form.event_staff"
+                    [placeholder]="'0'" [(inputModel)]="form.event_staff">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label> Competitor </label>
+                <app-input [type]="'number'" [class]="'form-control'" [id]="'name'" [value]="form.competitor"
+                    [placeholder]="'0'" [(inputModel)]="form.competitor">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label> Visitor </label>
+                <app-input [type]="'number'" [class]="'form-control'" [id]="'name'" [value]="form.visitor"
+                    [placeholder]="'0'" [(inputModel)]="form.visitor">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+                <div class="form-group">
+                    <label>Use of O2:</label>
+                    <ng-select class="form-control p-0" (change)="onSelected($event, 'o2')">
+                        <ng-option *ngFor="let data of levels; let i = index" value="{{ data.id }}">
+                            {{ data.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mt-4">
+                <div class="form-group">
+                    <label>Use of Entonox:</label>
+                    <ng-select class="form-control p-0" (change)="onSelected($event, 'entonox')">
+                        <ng-option *ngFor="let data of levels; let i = index" value="{{ data.id }}">
+                            {{ data.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+
+            <!-- <div class="col-lg-12 mt-4">
+                
+                <label> Message </label>
+                <app-textarea 
+                    [class]="'form-control'" 
+                    [id]="'name'"
+                    [value]="newNessage.message"
+                    [placeholder]="'Enter Job Name'"
+                    [(inputModel)]="newNessage.message">
+                </app-textarea>
+
+            </div> -->
+
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn ripple btn-primary" type="button" (click)="onSubmit($event)">Create Now</button>
+        <button type="button" class="btn ripple btn-secondary" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>

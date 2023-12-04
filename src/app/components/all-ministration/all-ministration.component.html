@@ -1,0 +1,379 @@
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h2 class="main-content-title tx-24 mg-b-5"> All Users Ministration</h2>
+        <ol class="breadcrumb">
+            <!-- <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pages</li> -->
+        </ol>
+    </div>
+    <div class="d-flex">
+        <div class="justify-content-center">
+            <!-- <button type="button" class="btn btn-white btn-icon-text my-2 mr-2">
+                <i class="fe fe-filter mr-2"></i> Search
+            </button> -->
+            <!-- <button class="btn ripple text-white bg-orange-color" (click)="Select2Open(select2modal)">
+                <i class="fe fe-download-cloud mr-2"></i> New Minstration
+            </button> -->
+        </div>
+    </div>
+</div>
+<!-- End Page Header -->
+
+<div class="row row-sm">
+    <div class="col-md-12 col-lg-12">
+        <div class="card custom-card">
+            <div class="card-header  border-bottom-0 pb-0">
+                <div>
+                    <div class="d-flex">
+                        <label class="main-content-label my-auto pt-2">All Users Minstration </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row table-filter">
+                    <div class="col-lg-3">
+                        <div class="show-entries">
+                            <span>Show</span>
+                            <select class="form-control">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                            <span>entries</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 d-lg-flex">
+
+                        <div class="d-flex mt-4 mt-lg-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive border">
+                    <table class="table mb-0 text-nowrap text-md-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Ministration Purpose</th>
+                                <th>Ministration Type</th>
+                                <th>Ministration Service</th>
+                                <th>ministration Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr class="border-bottom" *ngFor="let data of ministration ">
+                                <td>{{ data.name }}</td>
+                                <td>{{ data.ministrationType }}</td>
+                                <td>{{ data.ministrationService }}</td>
+                                <td>{{ data.ministrationDate | date: 'yyyy-MM-dd ' }}</td>
+                                <td>
+                                    <div class="button-list">
+
+                                        <a [routerLink]="['/ministration', data._id, 'ministration']" class="btn">
+                                            <!-- <i class="ti ti-pencil"></i> -->
+                                            View Details
+                                        </a>
+
+                                        <a *ngIf="isAdmin" href="javascript:;" (click)="onDelete(data._id)" class="btn">
+                                            <i class="ti ti-trash"></i>
+                                        </a>
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-3">
+                        <ngb-pagination class="d-flex justify-content-end" [collectionSize]="pages.length"
+                            [maxSize]="config.maxSize" [pageSize]="config.pageSize" [(page)]="page"
+                            aria-label="Custom pagination">
+                            <ng-template ngbPaginationPrevious>Prev</ng-template>
+                            <ng-template ngbPaginationNext>Next</ng-template>
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- list of cards -->
+
+        <!-- <div class="card custom-card">
+            <div class="card-header border-bottom-0 pb-0">
+                <div class="d-flex">
+                    <label class="main-content-label my-auto pt-2">All Users Ministration</label>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card-columns">
+                            <div class="card" *ngFor="let data of ministration">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ data.name }}</h5>
+                                    <p class="card-text">{{ data.ministrationType }}</p>
+                                    <p class="card-text">{{ data.ministrationService }}</p>
+                                    <p class="card-text">{{ data.ministrationDate | date: 'yyyy-MM-dd ' }}</p>
+                                    <div class="button-list">
+                                        <a [routerLink]="['/ministration', data._id, 'ministration']" class="btn">
+                                            <i class="ti ti-pencil"></i>
+                                        </a>
+                                        <a *ngIf="isAdmin" href="javascript:;" (click)="onDelete(data._id)" class="btn">
+                                            <i class="ti ti-trash"></i> Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <ngb-pagination class="d-flex justify-content-end" [collectionSize]="pages.length"
+                        [maxSize]="config.maxSize" [pageSize]="config.pageSize" [(page)]="page"
+                        aria-label="Custom pagination">
+                        <ng-template ngbPaginationPrevious>Prev</ng-template>
+                        <ng-template ngbPaginationNext>Next</ng-template>
+                    </ngb-pagination>
+                </div>
+            </div>
+        </div> -->
+
+
+
+        <!-- end of list of card -->
+
+
+
+    </div>
+</div>
+<!-- End Row -->
+
+
+<ng-template #select2modal let-modal>
+    <!-- Select2 modal -->
+    <div class="modal-header">
+        <h6 class="modal-title">Ministration</h6>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h6> Ministration </h6>
+        <div class="form-group row">
+            <div class="col-lg-12 mt-4">
+
+                <label>Ministration Purpose</label>
+                <!-- <app-input [type]="'text'" [class]="'form-control'" [id]="'title'" [value]="levite.names"
+                    [placeholder]="'Minstration name'" (onDataModelChange)="onDataModelChange($event)"
+                    [(inputModel)]="levite.name">
+                </app-input> -->
+
+                <select class="form-control" id="title" (change)="onSelectChange($event.target.value)"
+                    [(ngModel)]="levite.name">
+                    <option *ngFor="let name of purpose.names" [value]="name">
+                        {{ name }}
+                    </option>
+                </select>
+
+            </div>
+
+            <div class="col-lg-12 mt-4">
+                <label>ministration Date</label>
+                <app-input [type]="'date'" [class]="'form-control'" [id]="'meta_title'"
+                    [value]="levite.ministrationDate" [(inputModel)]="levite.ministrationDate">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+                <div class="form-group">
+                    <label>Ministration Types</label>
+                    <div *ngFor="let type of ministrationTypes" class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" [id]="type" [name]="'ministrationType' + type"
+                                (change)="toggleSelection($event, type)" [checked]="isSelected(type)">
+                            {{ type }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mt-4">
+                <div class="form-group">
+                    <label>Ministration Service</label>
+                    <div *ngFor="let type of ministrationServices" class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" [id]="type" [name]="'ministrationService' + type"
+                                (change)="toggleSelectionService($event, type)" [checked]="isSelectedService(type)">
+                            {{ type }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button (click)="onSubmit($event)" class="btn ripple bg-orange-color text-white" type="button">Add
+            Ministration</button>
+        <button type="button" class="btn ripple btn-secondary" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>
+<ng-template #select2modal let-modal>
+    <!-- Select2 modal -->
+    <div class="modal-header">
+        <h6 class="modal-title">New Songs</h6>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h6>New Songs </h6>
+        <div class="form-group row">
+
+            <div class="col-lg-6 mt-4">
+
+                <label>Name</label>
+                <app-input [type]="'text'" [class]="'form-control'" [id]="'title'" [value]="template.title"
+                    [placeholder]="'Enter Page Name'" (onDataModelChange)="onDataModelChange($event)"
+                    [(inputModel)]="template.title">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label>Page Menu Label</label>
+                <app-input [type]="'text'" [class]="'form-control'" [id]="'page_label'" [value]="template.label"
+                    [placeholder]="'Enter Page Menu Label'" [(inputModel)]="template.label">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-12 mt-4">
+
+                <label>Page Url</label>
+                <app-input [type]="'text'" [class]="'form-control'" [readonly]="true" [id]="'page_url'"
+                    [value]="template.url" [placeholder]="'Enter Page Url'" [(inputModel)]="template.url">
+                </app-input>
+
+            </div>
+
+
+            <div class="col-lg-6 mt-4">
+                <label>Page Parent</label>
+                <ng-select class="form-control p-0" [(ngModel)]="selectedParent"
+                    (change)="onSelected($event, 'parent')">
+                    <ng-option *ngFor="let data of pages" value="{{ data.id }}">{{ data.title }}</ng-option>
+                </ng-select>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+                <label>Page Layout</label>
+                <ng-select class="form-control p-0" (change)="onSelected($event, 'layout')">
+                    <ng-option value="{{ data.id }}" *ngFor="let data of layout">{{ data.label }}</ng-option>
+                </ng-select>
+
+            </div>
+
+            <!-- <div class="col-lg-6 mt-4">
+                
+                <label>Page Category</label>
+                <ng-select class="form-control p-0">
+                    <ng-option value="Firefox">Category</ng-option>
+                </ng-select>
+
+            </div> -->
+
+            <div class="col-lg-12 mt-4">
+                <label>SEO Keywords</label>
+
+
+                <app-input [type]="'text'" [class]="'form-control'" [id]="'meta_title'"
+                    [value]="template.seo_keyword_id" [placeholder]="'seo_keyword_id'"
+                    [(inputModel)]="template.seo_keyword_id">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-12 mt-4">
+                <label>Meta Title</label>
+                <app-input [type]="'text'" [class]="'form-control'" [id]="'meta_title'" [value]="template.meta_title"
+                    [placeholder]="'Enter Page Meta Title'" [(inputModel)]="template.meta_title">
+                </app-input>
+
+            </div>
+            <div class="col-lg-12 mt-4">
+                <label>Layout id</label>
+                <app-input [type]="'text'" [class]="'form-control'" [id]="'meta_title'" [value]="template.layout_id"
+                    [placeholder]="'Enter Page Meta Title'" [(inputModel)]="template.layout_id">
+                </app-input>
+
+            </div>
+
+
+            <div class="col-lg-12 mt-4">
+                <label>Meta Description</label>
+                <app-input [type]="'text'" [class]="'form-control'" [id]="'meta_description'"
+                    [value]="template.meta_description" [placeholder]="'Select layout'"
+                    [(inputModel)]="template.meta_description">
+                </app-input>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label>Header Section</label>
+                <ng-select class="form-control p-0" (change)="onSelected($event, 'header_position')">
+                    <ng-option value="1">Show</ng-option>
+                    <ng-option value="0">Hide</ng-option>
+                </ng-select>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+                <label>Footer Section</label>
+                <ng-select class="form-control p-0" (change)="onSelected($event, 'footer_position')">
+                    <ng-option value="1">Show</ng-option>
+                    <ng-option value="0">Hide</ng-option>
+                </ng-select>
+
+            </div>
+
+            <div class="col-lg-6 mt-4">
+
+                <label>Page Order</label>
+                <ng-select class="form-control p-0" (change)="onSelected($event, 'page_order')">
+                    <ng-option value="1">1</ng-option>
+                    <ng-option value="2">2</ng-option>
+                    <ng-option value="3">3</ng-option>
+                    <ng-option value="2">4</ng-option>
+                    <ng-option value="3">5</ng-option>
+                </ng-select>
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button (click)="onSubmit($event)" class="btn ripple btn-primary" type="button">Add New Page</button>
+        <button type="button" class="btn ripple btn-secondary" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>
+
+<app-alert [status]="changingValue" (onTriggerChange)="delete($event)"></app-alert>
+<!-- <app-alert [status]="changingValue" (onTriggerChange)="delete($event)"></app-alert> -->
